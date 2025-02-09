@@ -19,7 +19,7 @@ permita llevar la gestión de eventos festivos.
 
 ## Persistencia de datos
 ### Modelo Entidad-Relación
-    ![modelo e-r](er_event_management.png)
+![Modelo E/R](er_event_management.png)
 
 ## Objetivo del ejercicio
 El objetivo del ejercicio busca familiarizar a los 
