@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">EventManagment</string>
+    <string name="button_guardar">Guardar</string>
+    <string name="content_description_logo_image">imagen del Logo de la app</string>
+    <string name="lbl_payroll_empty">No hay personas registradas</string>
+    <string name="msg_an_error_has_ocurred">Ha ocurrido un error</string>
+    <string name="label_retry">Volver</string>
+
+    <!-- FurniturePageScreen -->
+    <string name="label_description">Descripción</string>
+    <string name="label_price">Precio</string>
+
+    <!-- EventPageScreen -->
+    <string name="label_eventName">Nombre del Evento</string>
+    <string name="label_eventDate">Fecha del Evento</string>
+
+    <!-- PersonPageScreen -->
+    <string name="label_personName">Nombre</string>
+    <string name="label_personLastName">apellido</string>
+
+
+</resources>
