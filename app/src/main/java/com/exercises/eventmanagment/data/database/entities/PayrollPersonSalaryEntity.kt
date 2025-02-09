@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.exercises.eventmanagement.commons.CommonValues.TypeActivity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 
 /**
@@ -33,6 +34,8 @@ import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 )
 data class PayrollPersonSalaryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int?,
+    val salary: Double,
+    @ColumnInfo(name = "type_activity") val typeActivity: TypeActivity,
     @ColumnInfo(name = "payroll_id") val payrollId: Int,
-    @ColumnInfo(name = "person_salary_id") val personSalaryId: Int,
+    @ColumnInfo(name = "person_id") val personId: Int,
 )
