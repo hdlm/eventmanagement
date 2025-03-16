@@ -5,6 +5,7 @@ import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
 import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
+import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 
@@ -25,6 +26,7 @@ interface LocalRepository : KoinComponent {
     suspend fun insertPayroll(person: PayrollEntity)
     suspend fun deletePayroll(person: PayrollEntity)
     suspend fun getAllPayroll(): List<PayrollEntity>
+    fun getAllPayrollFlow(): Flow<List<PayrollWithPersonSalary>>
     suspend fun getPayrollById(id: Int): PayrollEntity
 
     suspend fun insertPerson(person: PersonEntity)

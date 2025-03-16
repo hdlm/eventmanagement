@@ -1,6 +1,5 @@
 package com.exercises.eventmanagment.presentation.usecase
 
-import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
 import com.exercises.eventmanagment.data.mapper.toModel
 import com.exercises.eventmanagment.presentation.domain.EventModel

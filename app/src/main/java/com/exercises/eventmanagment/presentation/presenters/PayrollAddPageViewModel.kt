@@ -1,28 +1,14 @@
 package com.exercises.eventmanagment.presentation.presenters
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.exercises.eventmanagement.data.database.entities.EventEntity
-import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
-import com.exercises.eventmanagment.commons.onDismissType
-import com.exercises.eventmanagment.data.mapper.toEntity
-import com.exercises.eventmanagment.data.mapper.toModel
-import com.exercises.eventmanagment.presentation.domain.PayrollModel
-import com.exercises.eventmanagment.presentation.domain.PersonModel
 import com.exercises.eventmanagment.presentation.usecase.EventInfoUseCase
 import com.exercises.eventmanagment.presentation.usecase.PersonInfoUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class PayrolPageViewModel: ViewModel(), KoinComponent {
+class PayrollAddPageViewModel: ViewModel(), KoinComponent {
     // Lazy injection
     private val localRepository: LocalRepository by inject()
     private val personInfoUseCase: PersonInfoUseCase by inject()

@@ -13,6 +13,7 @@ import com.exercises.eventmanagement.data.database.entities.PersonEntity
 import com.exercises.eventmanagment.data.database.daos.PayrollPersonSalaryDao
 import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
+import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
 
 class LocalRepositoryImpl : LocalRepository {
@@ -73,6 +74,9 @@ class LocalRepositoryImpl : LocalRepository {
 
     override suspend fun getAllPayroll(): List<PayrollEntity> =
         payrollDao.getAllPayroll()
+
+    override fun getAllPayrollFlow(): Flow<List<PayrollWithPersonSalary>> =
+        payrollDao.observablePayroll()
 
     suspend fun getAllPersonSalary(): List<PersonSalaryEntity> =
         payrollDao.getAllPersonSalary()

@@ -10,7 +10,7 @@ data class PayrollWithPersonSalary(
     @Embedded
     val payroll: PayrollEntity,
     @Relation(
-        parentColumn = "payroll_id",
+        parentColumn = "id",
         entityColumn = "person_id"
     )
     val persons: List<PersonSalaryEntity>

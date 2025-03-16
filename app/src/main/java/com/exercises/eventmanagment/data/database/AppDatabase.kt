@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.exercises.eventmanagement.data.database.daos.EventDao
 import com.exercises.eventmanagement.data.database.daos.FurnitureDao
 import com.exercises.eventmanagement.data.database.daos.PayrollDao
@@ -12,6 +13,7 @@ import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
+import com.exercises.eventmanagment.commons.Converters
 import com.exercises.eventmanagment.data.database.daos.PayrollPersonSalaryDao
 import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
@@ -29,6 +31,7 @@ import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
     PayrollPersonSalaryEntity::class
     ], version = 1, exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun personDao(): PersonDao
     abstract fun eventDao(): EventDao

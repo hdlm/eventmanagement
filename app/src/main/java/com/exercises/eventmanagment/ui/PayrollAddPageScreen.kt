@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagment.presentation.domain.PayrollModel
-import com.exercises.eventmanagment.presentation.presenters.PayrolPageViewModel
+import com.exercises.eventmanagment.presentation.presenters.PayrollAddPageViewModel
 import com.exercises.eventmanagment.ui.theme.EventManagementTheme
 import org.koin.androidx.compose.koinViewModel
 import androidx.compose.foundation.background
@@ -46,7 +46,7 @@ import com.exercises.eventmanagment.ui.theme.grayDark
 fun PayrollAddPageScreen(
     navController: NavController,
     innerPadding: PaddingValues,
-    viewModel: PayrolPageViewModel = koinViewModel()
+    viewModel: PayrollAddPageViewModel = koinViewModel()
 ) {
     Log.d(TAG, "PayrollPageScreen() -> composed / recomposed")
 
@@ -237,7 +237,7 @@ private fun ComboBox(modifier: Modifier,
 fun PayrollPageScreenPreview() {
     val navController = NavController(LocalContext.current)
     val innerPadding = PaddingValues()
-    val viewModel = PayrolPageViewModel()
+    val viewModel = PayrollAddPageViewModel()
 
     EventManagementTheme {
         PayrollAddPageScreen(
