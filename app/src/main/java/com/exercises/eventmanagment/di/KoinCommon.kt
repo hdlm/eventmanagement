@@ -5,7 +5,7 @@ import com.exercises.eventmanagement.data.database.repositories.LocalRepositoryI
 import com.exercises.eventmanagement.presentation.presenters.EventAddPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.FurnitureAddPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.FurniturePageViewModel
-import com.exercises.eventmanagment.presentation.presenters.PayrolPageViewModel
+import com.exercises.eventmanagment.presentation.presenters.PayrollAddPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.PersonAddViewModel
 import com.exercises.eventmanagment.presentation.usecase.EventInfoUseCase
 import com.exercises.eventmanagment.presentation.usecase.FurnitureInfoUseCase
@@ -22,7 +22,7 @@ object Modules {
         viewModel { EventAddPageViewModel() }
         viewModel { FurnitureAddPageViewModel() }
         viewModel { FurniturePageViewModel() }
-        viewModel { PayrolPageViewModel() }
+        viewModel { PayrollAddPageViewModel() }
         viewModel { PersonAddViewModel() }
 
 

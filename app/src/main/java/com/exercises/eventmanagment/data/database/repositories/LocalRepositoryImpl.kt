@@ -74,6 +74,9 @@ class LocalRepositoryImpl : LocalRepository {
     override suspend fun getAllPayroll(): List<PayrollEntity> =
         payrollDao.getAllPayroll()
 
+    override fun getAllPayrollFlow(): Flow<List<PayrollEntity>> =
+        payrollDao.observablePayroll()
+
     suspend fun getAllPersonSalary(): List<PersonSalaryEntity> =
         payrollDao.getAllPersonSalary()
 

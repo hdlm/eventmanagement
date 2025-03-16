@@ -23,13 +23,13 @@ import com.exercises.eventmanagement.data.database.entities.PayrollEntity
         ForeignKey(
             entity = PersonSalaryEntity::class,
             parentColumns = ["id"],
-            childColumns = ["person_salary_id"],
+            childColumns = ["person_id"],
             onDelete = ForeignKey.Companion.NO_ACTION
         ),
     ],
     indices = [
         Index("payroll_id"),
-        Index("person_salary_id")
+        Index("person_id")
     ]
 )
 data class PayrollPersonSalaryEntity(

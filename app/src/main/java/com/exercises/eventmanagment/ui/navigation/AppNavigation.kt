@@ -9,7 +9,8 @@ import com.exercises.eventmanagement.presentation.presenters.EventAddPageViewMod
 import com.exercises.eventmanagment.presentation.presenters.EventPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.FurnitureAddPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.FurniturePageViewModel
-import com.exercises.eventmanagment.presentation.presenters.PayrolPageViewModel
+import com.exercises.eventmanagment.presentation.presenters.PayrollAddPageViewModel
+import com.exercises.eventmanagment.presentation.presenters.PayrollPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.PersonAddViewModel
 import com.exercises.eventmanagment.presentation.presenters.PersonPageViewModel
 import com.exercises.eventmanagment.ui.EventAddPageScreen
@@ -17,6 +18,7 @@ import com.exercises.eventmanagment.ui.EventPageScreen
 import com.exercises.eventmanagment.ui.FurnitureAddPageScreen
 import com.exercises.eventmanagment.ui.FurniturePageScreen
 import com.exercises.eventmanagment.ui.PayrollAddPageScreen
+import com.exercises.eventmanagment.ui.PayrollPageScreen
 import com.exercises.eventmanagment.ui.PersonAddPageScreen
 import com.exercises.eventmanagment.ui.PersonPageScreen
 
@@ -78,11 +80,19 @@ fun AppNavigation(
             )
         }
 
+        composable(Screens.PayrollPageScreen.route) {
+            PayrollPageScreen(
+                navController = navController,
+                innerPadding = innerPadding,
+                viewModel = PayrollPageViewModel()
+            )
+        }
+
         composable(Screens.PayrollAddPageScreen.route) {
             PayrollAddPageScreen(
                 navController = navController,
                 innerPadding = innerPadding,
-                viewModel = PayrolPageViewModel()
+                viewModel = PayrollAddPageViewModel()
             )
         }
 

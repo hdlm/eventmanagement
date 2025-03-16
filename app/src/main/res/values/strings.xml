@@ -18,5 +18,9 @@
     <string name="label_personName">Nombre</string>
     <string name="label_personLastName">apellido</string>
 
+    <!-- PayrollPageScreen -->
+    <string name="label_payrollEventName">Nómina del Evento:</string>
+    <string name="label_payrollPersonsNames">Personas asignadas a la Nómina:</string>
+
 
 </resources>

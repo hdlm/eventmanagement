@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface PayrollDao {
@@ -25,5 +26,8 @@ interface PayrollDao {
 
     @Query("SELECT * FROM payroll WHERE id = :id")
     suspend fun getPayrollById(id: Int): PayrollEntity
+
+    @Query("SELECT * FROM payroll")
+    fun observablePayroll(): Flow<List<PayrollEntity>>
 
 }

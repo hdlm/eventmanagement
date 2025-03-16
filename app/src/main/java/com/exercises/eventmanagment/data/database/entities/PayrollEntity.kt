@@ -31,8 +31,7 @@ import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
 )
 data class PayrollEntity(
     @PrimaryKey(autoGenerate = true) val id: Int?,
-    @ColumnInfo(name = "person_id") val personId: Int,
-    @ColumnInfo(name = "event_id") val eventId: Int,
+    @ColumnInfo(name = "person_id") val personId: Int?,
+    @ColumnInfo(name = "event_id") val eventId: Int?,
     val salary: Double,
-    @ColumnInfo(name = "type_activity") val typeActivity: String, // staff o entertaiment
 )

@@ -25,6 +25,7 @@ interface LocalRepository : KoinComponent {
     suspend fun insertPayroll(person: PayrollEntity)
     suspend fun deletePayroll(person: PayrollEntity)
     suspend fun getAllPayroll(): List<PayrollEntity>
+    fun getAllPayrollFlow(): Flow<List<PayrollEntity>>
     suspend fun getPayrollById(id: Int): PayrollEntity
 
     suspend fun insertPerson(person: PersonEntity)

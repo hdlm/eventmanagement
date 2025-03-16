@@ -92,7 +92,7 @@ fun MainScreen(
         Screens.EventPageScreen,
         Screens.FurniturePageScreen,
         Screens.PersonPageScreen,
-        Screens.PayrollAddPageScreen
+        Screens.PayrollPageScreen
     )
 
     val currentRoute = currentRoute(navController)
@@ -155,8 +155,8 @@ fun BottomNavigationBar(
                 label = { BottomNavigationBarText(selected = currentRoute == screen.route, label = screen.title ) },
                 selected = currentRoute == screen.route,
                 onClick = {
-                    if (screen.route == Screens.PayrollAddPageScreen.route) {
-                        val destination = Screens.PayrollAddPageScreen.route
+                    if (screen.route == Screens.PayrollPageScreen.route) {
+                        val destination = Screens.PayrollPageScreen.route
                         navController.navigate(destination)
                    }
                     if (screen.route == Screens.PersonPageScreen.route) {

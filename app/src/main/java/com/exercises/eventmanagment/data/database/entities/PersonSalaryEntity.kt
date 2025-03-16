@@ -22,7 +22,7 @@ data class PersonSalaryEntity(
     @PrimaryKey(autoGenerate = true) val id: Int?,
     @ColumnInfo(name = "person_id") val personId: Int?,
     val salary: Double,
-    @ColumnInfo(name = "type_activity") val typeActivity: String, // staff o entertaiment
+    @ColumnInfo(name = "type_activity") val typeActivity: String?, // staff o entertaiment
 )
 
 
