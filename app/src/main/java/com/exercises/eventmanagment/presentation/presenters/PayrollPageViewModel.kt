@@ -3,7 +3,10 @@ package com.exercises.eventmanagment.presentation.presenters
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagment.presentation.domain.EventModel
 import com.exercises.eventmanagment.presentation.domain.PayrollModel
+import com.exercises.eventmanagment.presentation.domain.PersonModel
 import com.exercises.eventmanagment.presentation.usecase.PayrollInfoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +22,8 @@ import org.koin.core.component.inject
 class PayrollPageViewModel : ViewModel(), KoinComponent {
     private val payrollInfoUseCase: PayrollInfoUseCase by inject()
 
-    private val _payrolls = MutableStateFlow<List<PayrollModel>>(emptyList())
+    private val _payrolls = MutableStateFlow<List<PayrollWithPersonSalary>>(emptyList())
+    //TODO agregar el resto de las listas (persons, events)
 
     private val refreshing = MutableStateFlow(false)
 
@@ -69,6 +73,8 @@ sealed interface PayrollScreenUiState {
     ) : PayrollScreenUiState
 
     data class Ready (
-        val payrolls: List<PayrollModel> = emptyList()
+        val payrolls: List<PayrollWithPersonSalary> = emptyList(),
+        val events: List<EventModel> = emptyList(),
+        val persons: List<PersonModel> = emptyList()
     ) : PayrollScreenUiState
 }

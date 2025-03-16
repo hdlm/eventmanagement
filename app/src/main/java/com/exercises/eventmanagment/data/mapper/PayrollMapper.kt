@@ -6,6 +6,12 @@ import com.exercises.eventmanagment.presentation.domain.PayrollModel
 import com.exercises.eventmanagment.presentation.domain.PersonSalaryModel
 
 
+fun PayrollEntity.toModel(event: EventModel, persons: List<PersonSalaryModel>) = PayrollModel(
+    id = id,
+    event = event,
+    persons =  persons
+)
+
 fun PayrollModel.toEntity() =
     PayrollEntity(
         id = id,

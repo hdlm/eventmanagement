@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.exercises.eventmanagment.R
+import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import com.exercises.eventmanagment.presentation.domain.EventModel
 import com.exercises.eventmanagment.presentation.domain.PayrollModel
 import com.exercises.eventmanagment.presentation.domain.PersonSalaryModel
@@ -28,7 +29,7 @@ import com.exercises.eventmanagment.ui.theme.YellowGrey
 
 @Composable
 fun PayrollItemView(
-    payroll: PayrollModel,
+    payroll: PayrollWithPersonSalary,
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean = false
 ) {
@@ -50,10 +51,10 @@ fun PayrollItemView(
                 .fillMaxWidth()
             ) {
                 Text(text = stringResource(R.string.label_payrollEventName), fontWeight = FontWeight.Bold)
-                Text(text = payroll.event.name )
+                Text(text = payroll.payroll.eventId.toString() )
                 Spacer(modifier = Modifier.padding(vertical = lineSpacing))
                 Text(text = stringResource(R.string.label_payrollPersonsNames), fontWeight = FontWeight.Bold)
-                Text(text = payroll.persons.joinToString(", ") { it.person.name})
+                Text(text = payroll.persons.joinToString(", ") { it.personId.toString()})
             }
 
         }
@@ -64,19 +65,19 @@ fun PayrollItemView(
 @Composable
 @Preview
 fun PayrollItemViewPreview() {
-    val payroll = PayrollModel(
-        id = 1,
-        event = EventModel(
-            id = TODO(),
-            name = TODO(),
-            address = TODO(),
-            startEventdate = TODO(),
-            endEventdate = TODO()
-        ),
-        persons = TODO()
-    )
-
-    PayrollItemView(
-        payroll = payroll
-    )
+//    val payroll = PayrollWithPersonSalary(
+//        id = 1,
+//        event = EventModel(
+//            id = TODO(),
+//            name = TODO(),
+//            address = TODO(),
+//            startEventdate = TODO(),
+//            endEventdate = TODO()
+//        ),
+//        persons = TODO()
+//    )
+//
+//    PayrollItemView(
+//        payroll = payroll
+//    )
 }

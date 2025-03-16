@@ -2,6 +2,7 @@ package com.exercises.eventmanagment.presentation.usecase
 
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import com.exercises.eventmanagment.presentation.domain.EventModel
 import com.exercises.eventmanagment.presentation.domain.PayrollModel
 import com.exercises.eventmanagment.presentation.domain.PersonModel
@@ -15,14 +16,8 @@ class PayrollInfoUseCase : KoinComponent  {
     private val localRepository: LocalRepository
         get() = get()
 
-    operator fun invoke(): Flow<List<PayrollModel>> =
+    operator fun invoke(): Flow<List<PayrollWithPersonSalary>> =
         localRepository.getAllPayrollFlow()
-            .map { entities ->
-                val models = entities.map { entity ->
-                    entity.toModel()
-                }
-                models
-            }
 
 }
 
