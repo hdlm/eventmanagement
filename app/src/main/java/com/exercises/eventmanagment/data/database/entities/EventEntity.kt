@@ -4,9 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-/**
- * La clase representa la entidad de los Eventos
- */
 @Entity(tableName = "event")
 data class EventEntity(
     @PrimaryKey(autoGenerate = true) val id: Int?,
