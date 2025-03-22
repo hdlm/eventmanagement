@@ -59,7 +59,7 @@ fun PersonPageScreen(
     val colorScheme = if (isDarkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(colorScheme = colorScheme) {
-        Log.d(TAG, "EventPageScreen() -> composed / recomposed")
+        Log.d(TAG, "PersonPageScreen() -> composed / recomposed")
 
         when (val uiState = personScreenUiState) {
             is PersonScreenUiState.Loading ->
