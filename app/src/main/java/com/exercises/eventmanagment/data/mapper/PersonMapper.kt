@@ -13,3 +13,14 @@ fun PersonEntity.toModel() =
         phone = phone,
         email = email
     )
+
+fun PersonModel.toEntity() =
+    PersonEntity(
+        id = id,
+        name = name,
+        lastName = lastName,
+        gender = gender,
+        age = age,
+        phone = phone,
+        email = email
+    )

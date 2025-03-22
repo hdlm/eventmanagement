@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagment.data.mapper.toEntity
 import com.exercises.eventmanagment.presentation.domain.PersonModel
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -14,16 +15,7 @@ class PersonAddViewModel: ViewModel(), KoinComponent {
 
     fun savePerson(person: PersonModel) {
         viewModelScope.launch {
-            //mapeo del model a entidad del objeto person
-            val personEntity = PersonEntity(
-                id = null,
-                name = person.name,
-                lastName = person.lastName,
-                gender = person.gender,
-                age = person.age,
-                phone = person.phone,
-                email = person.email
-            )
+                localRepository.insertPerson(person.toEntity())
         }
     }
 
