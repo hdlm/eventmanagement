@@ -5,14 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import com.exercises.eventmanagment.presentation.domain.EventModel
-import com.exercises.eventmanagment.presentation.domain.PayrollModel
 import com.exercises.eventmanagment.presentation.domain.PersonModel
+import com.exercises.eventmanagment.presentation.usecase.EventInfoUseCase
 import com.exercises.eventmanagment.presentation.usecase.PayrollInfoUseCase
+import com.exercises.eventmanagment.presentation.usecase.PersonInfoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,9 +24,13 @@ import org.koin.core.component.inject
 @OptIn(ExperimentalCoroutinesApi::class)
 class PayrollPageViewModel : ViewModel(), KoinComponent {
     private val payrollInfoUseCase: PayrollInfoUseCase by inject()
+    private val personInfoUseCase: PersonInfoUseCase by inject()
+    private val eventInfoUseCase: EventInfoUseCase by inject()
 
+    //listas de personas y eventos
     private val _payrolls = MutableStateFlow<List<PayrollWithPersonSalary>>(emptyList())
-    //TODO agregar el resto de las listas (persons, events)
+    private val _events = MutableStateFlow<List<EventModel>>(emptyList())
+    private val _persons = MutableStateFlow<List<PersonModel>>(emptyList())
 
     private val refreshing = MutableStateFlow(false)
 
@@ -35,20 +42,21 @@ class PayrollPageViewModel : ViewModel(), KoinComponent {
 
     init {
         viewModelScope.launch {
-            com.exercises.eventmanagment.commons.combine(
-                _payrolls.flatMapLatest {
-                    payrollInfoUseCase()
-                },
+            combine(
+                _payrolls.flatMapLatest { payrollInfoUseCase() },
+                _events.flatMapLatest { eventInfoUseCase() },
+                _persons.flatMapLatest { personInfoUseCase() },
                 refreshing
-            ) { payrolls,
-                refreshing ->
+            ) { payrolls, events, persons, refreshing ->
 
                 val uiState = if (refreshing) {
                     Log.d(TAG, "refreshing: $refreshing")
                     PayrollScreenUiState.Loading
                 } else {
                     PayrollScreenUiState.Ready(
-                        payrolls = payrolls
+                        payrolls = payrolls,
+                        events = events,
+                        persons = persons
                     )
                 }
                 uiState
