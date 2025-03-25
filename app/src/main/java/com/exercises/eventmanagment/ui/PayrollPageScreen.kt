@@ -31,6 +31,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagment.R
+import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagment.presentation.domain.EventModel
 import com.exercises.eventmanagment.presentation.presenters.PayrollPageViewModel
 import com.exercises.eventmanagment.presentation.presenters.PayrollScreenUiState
 import com.exercises.eventmanagment.ui.components.PayrollItemView
@@ -158,10 +160,13 @@ fun PayrollPageScreenReady(
             .fillMaxSize(),
         ) {
             LazyColumn( modifier = Modifier.padding(innerPadding)) {
-                items(uiState.payrolls) { payrolls ->
+                val combinedList = uiState.payrolls.zip(uiState.events)
+                items(combinedList) { pair ->
+                    val (payroll, event) = pair
                     PayrollItemView(modifier = Modifier
                         .padding(vertical = 8.dp, horizontal = horizontalMargin),
-                        payroll = payrolls
+                        payroll = payroll,
+                        event = event,
                     )
                 }
 

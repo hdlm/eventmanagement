@@ -22,6 +22,7 @@ import com.exercises.eventmanagment.R
 import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import com.exercises.eventmanagment.presentation.domain.EventModel
 import com.exercises.eventmanagment.presentation.domain.PayrollModel
+import com.exercises.eventmanagment.presentation.domain.PersonModel
 import com.exercises.eventmanagment.presentation.domain.PersonSalaryModel
 import com.exercises.eventmanagment.ui.theme.DarkColorScheme
 import com.exercises.eventmanagment.ui.theme.LightColorScheme
@@ -30,6 +31,7 @@ import com.exercises.eventmanagment.ui.theme.YellowGrey
 @Composable
 fun PayrollItemView(
     payroll: PayrollWithPersonSalary,
+    event: EventModel,
     modifier: Modifier = Modifier,
     isDarkTheme: Boolean = false
 ) {
@@ -51,7 +53,7 @@ fun PayrollItemView(
                 .fillMaxWidth()
             ) {
                 Text(text = stringResource(R.string.label_payrollEventName), fontWeight = FontWeight.Bold)
-                Text(text = payroll.payroll.eventId.toString() )
+                Text(text = event.name )
                 Spacer(modifier = Modifier.padding(vertical = lineSpacing))
                 Text(text = stringResource(R.string.label_payrollPersonsNames), fontWeight = FontWeight.Bold)
                 Text(text = payroll.persons.joinToString(", ") { it.personId.toString()})
