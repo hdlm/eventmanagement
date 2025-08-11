@@ -10,7 +10,7 @@ import com.exercises.eventmanagment.presentation.presenters.PersonAddViewModel
 import com.exercises.eventmanagment.presentation.usecase.EventInfoUseCase
 import com.exercises.eventmanagment.presentation.usecase.FurnitureInfoUseCase
 import com.exercises.eventmanagment.presentation.usecase.PersonInfoUseCase
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 object Modules {
@@ -26,5 +26,12 @@ object Modules {
         viewModel { PersonAddViewModel() }
 
 
+    }
+
+    val testModule = module {
+        factory<LocalRepository> { LocalRepositoryImpl() }
+        factory { EventInfoUseCase() }
+        factory { FurnitureInfoUseCase() }
+        factory { PersonInfoUseCase() }
     }
 }

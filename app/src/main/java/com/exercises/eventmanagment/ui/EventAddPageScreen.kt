@@ -29,16 +29,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import com.exercises.eventmanagement.data.database.entities.EventEntity
+import com.exercises.eventmanagement.data.database.repositories.LocalRepository
 import com.exercises.eventmanagement.presentation.presenters.EventAddPageViewModel
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagment.R
+import com.exercises.eventmanagment.data.mapper.toModel
+import com.exercises.eventmanagment.data.repositories.DummyRepositoryImpl
 import com.exercises.eventmanagment.presentation.domain.EventModel
 import com.exercises.eventmanagment.ui.theme.DarkColorScheme
 import com.exercises.eventmanagment.ui.theme.EventManagementTheme
 import com.exercises.eventmanagment.ui.theme.LightColorScheme
 import com.exercises.eventmanagment.ui.theme.YellowGrey
 import com.exercises.eventmanagment.ui.theme.YellowSurface
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
+import org.koin.dsl.module
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,59 +60,63 @@ fun EventAddPageScreen(
 ) {
     Log.d(TAG, "AddEventPageScreen() -> composed / recomposed")
 
-    val events = viewModel.events.collectAsStateWithLifecycle(emptyList())
-    val items = events.value
+    val onSaveEvent: (EventModel) -> Unit = { event ->
+        Log.d(TAG, "onSaveEvent() -> invoked")
+        viewModel.saveEvent(event)
+    }
 
-    val colorScheme = if (isDarkTheme) DarkColorScheme else LightColorScheme
+//    val events = viewModel.events.collectAsStateWithLifecycle(emptyList())
+//    val items = events.value
 
-    MaterialTheme(colorScheme = colorScheme) {
+    val onButtonClick: () -> Unit = {
+        Log.d(TAG, "onButtonClick() -> invoked")
+
+    }
+
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun EventAddPageScreenReady(
+    events: List<EventModel>,
+    onSaveEvent: (EventModel) -> Unit
+) {
+
+    var eventName by remember { mutableStateOf("") }
+    var eventAddress by remember { mutableStateOf("") }
+    var startEventDate by remember { mutableStateOf("") }
+    var endEventDate by remember { mutableStateOf("") }
+
+    //#region metodos de high-order empleados en la UI
+    val onSubmitClick: () -> Unit = {
+        Log.d(TAG, "onSubmitClick() -> invoked")
+        val event = EventModel(
+            name = eventName,
+            address = eventAddress,
+            startEventdate = startEventDate,
+            endEventdate = endEventDate,
+
+            )
+        onSaveEvent.invoke(event)
+    }
+    //#endregion
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(Screens.EventAddPageScreen.title) },
+            )
+        },
+        containerColor = YellowSurface,
+    ) { innerPadding ->
+
         LazyColumn(
             modifier = Modifier
+                .padding(innerPadding)
                 .fillMaxWidth()
         ) {
-            items(items) { item ->
-                Text(text = item.name)
-            }
-
-        }
-
-
-        var eventName by remember { mutableStateOf("") }
-        var eventAddress by remember { mutableStateOf("") }
-        var startEventDate by remember { mutableStateOf("") }
-        var endEventDate by remember { mutableStateOf("") }
-
-        val onSubmitClick: () -> Unit = {
-            Log.d(TAG, "onSubmitClick() -> invoked")
-            val event = EventModel(
-                name = eventName,
-                address = eventAddress,
-                startEventdate = startEventDate,
-                endEventdate = endEventDate,
-
-                )
-            viewModel.saveEvent(event)
-
-        }
-
-        val onButtonClick: () -> Unit = {
-            Log.d(TAG, "onButtonClick() -> invoked")
-
-        }
-
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text(Screens.EventAddPageScreen.title) },
-                )
-            },
-            containerColor = YellowSurface,
-        ) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding)
-                    .fillMaxWidth()
-            ) {
+            item {
                 TextField(
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = YellowGrey,
@@ -165,13 +178,17 @@ fun EventAddPageScreen(
                 )
 
                 Button(modifier = Modifier
-                    .align(Alignment.End)
                     .padding(all = 5.dp),
                     onClick = { onSubmitClick.invoke() }
                 ) {
                     Text(text = stringResource(id = R.string.button_guardar), color = Color.Black)
                 }
             }
+
+            items(events) { item ->
+                Text(text = item.name)
+            }
+
         }
 
     }
@@ -180,16 +197,28 @@ fun EventAddPageScreen(
 @Composable
  @Preview(showBackground = true)
 fun AddEventScreenPreview() {
-    val navController = NavController(LocalContext.current)
-    val innerPadding = PaddingValues()
-
-    EventManagementTheme {
-        EventAddPageScreen(
-            navController = navController,
-            innerPadding = innerPadding,
-            viewModel = EventAddPageViewModel()
+    KoinApplication( application =  {
+        modules(
+            module {
+                single<LocalRepository> { DummyRepositoryImpl() }
+            }
         )
+    }) {
+        EventManagementTheme {
+            val localRepository: LocalRepository = koinInject()
+
+            val events: List<EventEntity>
+            runBlocking {
+                events = localRepository.getAllEventsFlow().first()
+            }
+
+            EventAddPageScreenReady(
+                events = events.map { it.toModel() },
+                onSaveEvent = {}
+            )
+        }
     }
+
 }
 
 private const val TAG = "AddEventPageScreen"

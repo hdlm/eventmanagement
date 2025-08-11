@@ -15,6 +15,7 @@ class EventAddPageViewModel : ViewModel(), KoinComponent {
     private val localRepository: LocalRepository by inject()
     private val eventInfoUseCase: EventInfoUseCase by inject()
 
+    //TODO agregar los UIStatus (Loading, Ready, Error)
     val events = getAllEvents()
 
     fun saveEvent(event: EventModel) {
@@ -34,7 +35,7 @@ class EventAddPageViewModel : ViewModel(), KoinComponent {
     // traer evento por id
     fun getEvent(id: Int) {
         viewModelScope.launch {
-            localRepository.getEventById(id)
+            eventInfoUseCase.invoke(id)
         }
     }
 
