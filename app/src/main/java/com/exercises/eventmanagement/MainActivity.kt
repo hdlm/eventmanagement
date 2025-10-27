@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -45,7 +44,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         CommonValues.context = applicationContext
 
-        // declaracion de Koin en la app
         try {
             startKoin {
                 androidContext(this@MainActivity)
@@ -53,7 +51,6 @@ class MainActivity : ComponentActivity() {
                 modules(appModule)
             }
         } catch (ex: KoinApplicationAlreadyStartedException) {
-            // ignore
         }
 
         setContent {
@@ -64,22 +61,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    EventManagementTheme {
-        Greeting("Android")
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
@@ -87,7 +68,6 @@ fun MainScreen(
 ) {
     val navController = rememberNavController()
 
-    // elementos de navegacion que estaran en el bottom Bar del Scaffold
     val navigationItems = listOf(
         Screens.EventPageScreen,
         Screens.FurniturePageScreen,
@@ -99,43 +79,30 @@ fun MainScreen(
 
     val colorScheme = if (isDarkTheme) DarkColorScheme else LightColorScheme
 
-        Scaffold(
-            /*topBar = {
-            TopAppBar(
-                title = {
-                    Text("Gestor de Eventos")
+    Scaffold(
+        bottomBar = {
+            currentRoute?.let {
+                BottomAppBar {
+                    BottomNavigationBar(navController = navController, items = navigationItems)
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        text = "Bottom App Bar"
+                    )
                 }
-            )
-        },*/
-            bottomBar = {
-                currentRoute?.let {
-                    BottomAppBar(
-//                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-//                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-                    ) {
-                        BottomNavigationBar(navController = navController, items = navigationItems)
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center,
-                            text = "Bottom App Bar"
-                        )
-                    }
-                }
-            },
-            floatingActionButton = {
-                // omitir el  floating Action button
-            },
-            content = { innerPadding ->
-                AppNavigation(
-                    navController = navController,
-                    startDest = Screens.EventPageScreen,
-                    innerPadding = innerPadding,
-                )
             }
-        )
+        },
+        floatingActionButton = {},
+        content = { innerPadding ->
+            AppNavigation(
+                navController = navController,
+                startDest = Screens.EventPageScreen,
+                innerPadding = innerPadding,
+            )
+        }
+    )
 
-    }
-
+}
 
 @Composable
 fun BottomNavigationBar(
@@ -151,26 +118,38 @@ fun BottomNavigationBar(
     ) {
         items.forEach { screen ->
             NavigationBarItem(
-                icon = { Icon(imageVector = screen.icon, contentDescription = screen.title) },
-                label = { BottomNavigationBarText(selected = currentRoute == screen.route, label = screen.title ) },
+                icon = {
+                    Icon(
+                        imageVector = screen.icon,
+                        contentDescription = screen.title
+                    )
+                },
+                label = {
+                    BottomNavigationBarText(
+                        selected = currentRoute == screen.route,
+                        label = screen.title
+                    )
+                },
                 selected = currentRoute == screen.route,
                 onClick = {
-                    if (screen.route == Screens.PayrollPageScreen.route) {
-                        val destination = Screens.PayrollPageScreen.route
-                        navController.navigate(destination)
-                   }
-                    if (screen.route == Screens.PersonPageScreen.route) {
-                        val destination = Screens.PersonPageScreen.route
-                        navController.navigate(destination)
-                    }
-                    else if (screen.route == Screens.EventPageScreen.route) {
-                        navController.navigate(screen.route) {
-                            val destination = Screens.EventPageScreen.route
+                    when (screen.route) {
+                        Screens.PayrollPageScreen.route -> {
+                            val destination = Screens.PayrollPageScreen.route
                             navController.navigate(destination)
                         }
-                    }
-                    else if (screen.route == Screens.FurniturePageScreen.route) {
-                        navController.navigate(screen.route) {
+
+                        Screens.PersonPageScreen.route -> {
+                            val destination = Screens.PersonPageScreen.route
+                            navController.navigate(destination)
+                        }
+
+                        Screens.EventPageScreen.route -> {
+                            val destination = Screens.EventPageScreen.route
+                            navController.navigate(destination)
+
+                        }
+
+                        Screens.FurniturePageScreen.route -> {
                             val destination = Screens.FurniturePageScreen.route
                             navController.navigate(destination)
                         }
@@ -191,13 +170,12 @@ fun BottomNavigationBar(
 }
 
 
-
 @Composable
 private fun BottomNavigationBarText(
     selected: Boolean,
     label: String,
 ) {
-    if(selected) {
+    if (selected) {
         Text(label, fontSize = 11.sp, fontWeight = FontWeight.Normal, color = Color.Black)
     } else {
         Text(label, fontSize = 11.sp, fontWeight = FontWeight.Normal, color = Color.Black)

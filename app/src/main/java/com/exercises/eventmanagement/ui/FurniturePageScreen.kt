@@ -31,15 +31,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.data.database.entities.EventEntity
+import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
+import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagement.data.mapper.toModel
+import com.exercises.eventmanagement.data.repositories.DummyRepositoryImpl
+import com.exercises.eventmanagement.presentation.presenters.EventScreenUiState
 import com.exercises.eventmanagement.presentation.presenters.FurniturePageViewModel
 import com.exercises.eventmanagement.presentation.presenters.FurnitureScreenUiState
 import com.exercises.eventmanagement.ui.components.FurnitureItemView
 import com.exercises.eventmanagement.ui.theme.DarkColorScheme
 import com.exercises.eventmanagement.ui.theme.EventManagementTheme
 import com.exercises.eventmanagement.ui.theme.LightColorScheme
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
+import org.koin.dsl.module
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -165,14 +177,7 @@ fun FurniturePageScreenReady(
                         furniture = furniture
                     )
                 }
-
-                item {
-                    //TODO aqui va el boton de agregar
-                }
-
             }
-
-
         }
     }
 }
@@ -182,16 +187,32 @@ fun FurniturePageScreenReady(
 @Composable
 @Preview(showBackground = true)
 fun FurniturePageScreenPreview() {
-    val navController = NavController(LocalContext.current)
-    val innerPadding = PaddingValues()
+        KoinApplication( application =  {
+            modules(
+                module {
+                    single<LocalRepository> { DummyRepositoryImpl() }
+                }
+            )
+        }) {
+            EventManagementTheme {
+                val localRepository: LocalRepository = koinInject()
 
-    EventManagementTheme {
-        FurniturePageScreen(
-            navController = navController,
-            innerPadding = innerPadding,
-            viewModel = FurniturePageViewModel()
-        )
-    }
+                val furnitures: List<FurnitureEntity>
+                runBlocking {
+                    furnitures = localRepository.getAllFurniture()
+                }
+
+                val mockUiState = FurnitureScreenUiState.Ready(
+                    furnitures = furnitures.map { it.toModel() }
+                )
+
+                FurniturePageScreenReady(
+                    navController = rememberNavController(),
+                    uiState = mockUiState,
+                    innerPadding = PaddingValues(10.dp)
+                )
+            }
+        }
 }
 
 private const val TAG = "FurniturePageScreen"

@@ -1,5 +1,6 @@
 package com.exercises.eventmanagement.ui
 
+import android.R.attr.padding
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,8 +25,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagement.R
 import com.exercises.eventmanagement.presentation.domain.PersonModel
@@ -39,8 +42,6 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonAddPageScreen(
-    navController: NavController,
-    innerPadding: PaddingValues,
     viewModel: PersonAddViewModel = koinViewModel(),
     isDarkTheme: Boolean = false
 ) {
@@ -184,6 +185,14 @@ fun PersonAddPageScreen(
         }
     }
 }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun PersonAddScreenPreview() {
+    PersonAddPageScreen(
+        viewModel = PersonAddViewModel(),
+    )
 }
 
 private const val TAG = "PersonPageScreen"

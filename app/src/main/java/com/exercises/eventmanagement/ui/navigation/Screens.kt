@@ -15,9 +15,9 @@ sealed class Screens(
     object EventAddPageScreen: Screens(route = "EventAddPageScreen", title = "Datos del Evento" ,  Icons.AutoMirrored.Filled.AddToHomeScreen)
     object EventPageScreen: Screens(route = "EventPageScreen", title = "Eventos" ,  Icons.AutoMirrored.Filled.AddToHomeScreen)
     object FurniturePageScreen: Screens(route= "FurniturePageScreen", title = "Inmobiliario", icon = Icons.AutoMirrored.Filled.ShowChart)
-    object FurnitureAddPageScreen: Screens(route= "FurnitureAddPageScreen", title = "Inmobiliario", icon = Icons.AutoMirrored.Filled.ShowChart)
+    object FurnitureAddPageScreen: Screens(route= "FurnitureAddPageScreen", title = "Datos del Inmobiliario", icon = Icons.AutoMirrored.Filled.ShowChart)
     object PayrollPageScreen: Screens(route = "PayrollPageScreen", title = "Nómina" ,  Icons.AutoMirrored.Filled.EventNote)
     object PayrollAddPageScreen: Screens(route = "PayrollAddPageScreen", title = "Nómina" ,  Icons.AutoMirrored.Filled.EventNote)
     object PersonPageScreen: Screens(route = "PersonPageScreen", title = "Datos Personales" ,  Icons.AutoMirrored.Filled.Chat)
-    object PersonAddPageScreen: Screens(route = "PersonAddPageScreen", title = "Datos Personales" ,  Icons.AutoMirrored.Filled.Chat)
+    object PersonAddPageScreen: Screens(route = "PersonAddPageScreen", title = "Ingrese Datos Personales" ,  Icons.AutoMirrored.Filled.Chat)
 }

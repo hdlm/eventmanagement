@@ -3,8 +3,8 @@ package com.exercises.eventmanagement.data.database.repositories
 import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
-import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
@@ -28,7 +28,7 @@ interface LocalRepository : KoinComponent {
     suspend fun getAllPayroll(): List<PayrollEntity>
     fun getAllPayrollFlow(): Flow<List<PayrollWithPersonSalary>>
     suspend fun getPayrollById(id: Int): PayrollEntity
-
+    suspend fun getPayrollWithPersonSalaryById(id: Int): PayrollWithPersonSalary
     suspend fun insertPerson(person: PersonEntity)
     suspend fun deletePerson(person: PersonEntity)
     suspend fun getAllPerson(): List<PersonEntity>
@@ -42,7 +42,7 @@ interface LocalRepository : KoinComponent {
 
 
 
-    
+
 
 
 

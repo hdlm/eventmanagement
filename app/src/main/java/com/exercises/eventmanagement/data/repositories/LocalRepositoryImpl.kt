@@ -5,13 +5,13 @@ import com.exercises.eventmanagement.data.database.AppDatabase
 import com.exercises.eventmanagement.data.database.daos.EventDao
 import com.exercises.eventmanagement.data.database.daos.FurnitureDao
 import com.exercises.eventmanagement.data.database.daos.PayrollDao
-import com.exercises.eventmanagement.data.database.daos.PayrollPersonSalaryDao
 import com.exercises.eventmanagement.data.database.daos.PersonDao
 import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
-import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
+import com.exercises.eventmanagement.data.database.daos.PayrollPersonSalaryDao
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
@@ -84,6 +84,8 @@ class LocalRepositoryImpl : LocalRepository {
     override suspend fun getPayrollById(id: Int): PayrollEntity =
         payrollDao.getPayrollById(id)
 
+    override suspend fun getPayrollWithPersonSalaryById(id: Int): PayrollWithPersonSalary =
+        payrollPersonSalaryDao.getPayrollPersonSalaryById(id)
 
     override suspend fun insertPerson(person: PersonEntity) {
         personDao.insertPerson(person)

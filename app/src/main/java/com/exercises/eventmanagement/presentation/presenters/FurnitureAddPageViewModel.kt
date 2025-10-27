@@ -17,18 +17,4 @@ class FurnitureAddPageViewModel : ViewModel(), KoinComponent {
             localRepository.insertFurniture(furniture.toEntity())
         }
     }
-
-    // traer imobiliario por id
-    fun getFurniture(id: Int) {
-        viewModelScope.launch {
-            localRepository.getFurnitureById(id)
-        }
-    }
-
-    // traer todo el inmobiliario
-    fun getAllFurniture() {
-        viewModelScope.launch {
-            localRepository.getAllFurniture()
-        }
-    }
 }

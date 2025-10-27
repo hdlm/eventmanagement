@@ -24,22 +24,40 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.data.database.entities.EventEntity
+import com.exercises.eventmanagement.data.database.entities.PersonEntity
 import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagement.data.mapper.toModel
+import com.exercises.eventmanagement.data.repositories.DummyRepositoryImpl
 import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.domain.PersonModel
+import com.exercises.eventmanagement.presentation.presenters.EventScreenUiState
 import com.exercises.eventmanagement.presentation.presenters.PayrollPageViewModel
 import com.exercises.eventmanagement.presentation.presenters.PayrollScreenUiState
 import com.exercises.eventmanagement.ui.components.PayrollItemView
 import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.EventManagementTheme
 import com.exercises.eventmanagement.ui.theme.LightColorScheme
 import com.exercises.eventmanagement.ui.theme.YellowGrey
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
+import org.koin.dsl.module
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -163,15 +181,15 @@ fun PayrollPageScreenReady(
                 val combinedList = uiState.payrolls.zip(uiState.events)
                 items(combinedList) { pair ->
                     val (payroll, event) = pair
-                    PayrollItemView(modifier = Modifier
-                        .padding(vertical = 8.dp, horizontal = horizontalMargin),
+                    PayrollItemView(
                         payroll = payroll,
                         event = event,
+                        modifier = Modifier
+                            .padding(
+                                vertical = 8.dp,
+                                horizontal = horizontalMargin
+                            )
                     )
-                }
-
-                item {
-                    //TODO aqui va el boton de agregar
                 }
             }
         }
@@ -180,19 +198,43 @@ fun PayrollPageScreenReady(
 
 
 
-//@Composable
-//@Preview(showBackground = true)
-//fun PayrollPageScreenPreview() {
-//    val navController = NavController(LocalContext.current)
-//    val innerPadding = PaddingValues()
-//
-//    EventManagementTheme {
-//        PayrollPageScreen(
-//            navController = navController,
-//            innerPadding = innerPadding,
-//            viewModel = PayrollPageViewModel()
-//        )
-//    }
-//}
+@Composable
+@Preview(showBackground = true)
+fun PayrollScreenPreview(){
+    KoinApplication( application =  {
+        modules(
+            module {
+                single<LocalRepository> { DummyRepositoryImpl() }
+            }
+        )
+    }) {
+        EventManagementTheme {
+            val localRepository: LocalRepository = koinInject()
+
+            val payrolls: List<PayrollWithPersonSalary>
+            val events: List<EventEntity>
+            val persons: List<PersonEntity>
+            runBlocking {
+                events = localRepository.getAllEventsFlow().first()
+                payrolls = localRepository.getAllPayrollFlow().first()
+                persons = localRepository.getAllPerson()
+            }
+
+            val mockUiState = PayrollScreenUiState.Ready(
+                events = events.map { it.toModel() },
+                payrolls = payrolls,
+                persons = persons.map { it.toModel() }
+            )
+
+            PayrollPageScreenReady(
+                navController = rememberNavController(),
+                uiState = mockUiState,
+                innerPadding = PaddingValues(10.dp)
+            )
+        }
+
+    }
+
+}
 
 private const val TAG = "PayrollPageScreen"

@@ -44,16 +44,36 @@ fun PersonItemView(
                 contentColor = Color.Black
             )
         ) {
-            Column(modifier = Modifier.padding(horizontal = horizontalMargin, vertical = lineSpacing)
-                .fillMaxWidth()
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = horizontalMargin, vertical = lineSpacing)
+                    .fillMaxWidth()
             ) {
+                Text(text = "${stringResource(R.string.label_personId)} ${person.id.toString()}", fontWeight = FontWeight.Bold)
+
                 Text(text = stringResource(R.string.label_personName), fontWeight = FontWeight.Bold)
                 Text(text = person.name)
                 Spacer(modifier = Modifier.padding(vertical = lineSpacing))
+
                 Text(text = stringResource(R.string.label_personLastName), fontWeight = FontWeight.Bold)
                 Text(text = person.lastName)
-            }
+                Spacer(modifier = Modifier.padding(vertical = lineSpacing))
 
+                Text(text = stringResource(R.string.label_personGender), fontWeight = FontWeight.Bold)
+                Text(text = person.gender)
+                Spacer(modifier = Modifier.padding(vertical = lineSpacing))
+
+                Text(text = stringResource(R.string.label_personAge), fontWeight = FontWeight.Bold)
+                Text(text = person.age.toString())
+                Spacer(modifier = Modifier.padding(vertical = lineSpacing))
+
+                Text(text = stringResource(R.string.label_personPhone), fontWeight = FontWeight.Bold)
+                Text(text = person.phone)
+                Spacer(modifier = Modifier.padding(vertical = lineSpacing))
+
+                Text(text = stringResource(R.string.label_personEmail), fontWeight = FontWeight.Bold)
+                Text(text = person.email)
+            }
         }
     }
 }

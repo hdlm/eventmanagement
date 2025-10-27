@@ -35,13 +35,23 @@ import com.exercises.eventmanagement.presentation.presenters.EventPageViewModel
 import com.exercises.eventmanagement.presentation.presenters.EventScreenUiState
 import com.exercises.eventmanagement.ui.components.EventItemView
 import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.rememberNavController
+import com.exercises.eventmanagement.data.database.entities.EventEntity
+import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagement.data.mapper.toModel
+import com.exercises.eventmanagement.data.repositories.DummyRepositoryImpl
 import com.exercises.eventmanagement.ui.theme.EventManagementTheme
 import org.koin.androidx.compose.koinViewModel
 import com.exercises.eventmanagement.ui.theme.DarkColorScheme
 import com.exercises.eventmanagement.ui.theme.LightColorScheme
 import com.exercises.eventmanagement.ui.theme.YellowGrey
-
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
+import org.koin.dsl.module
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +61,6 @@ fun EventPageScreen(
     viewModel: EventPageViewModel = koinViewModel(),
     isDarkTheme: Boolean = false
 ) {
-
     val eventScreenUiState by viewModel.uiState.collectAsStateWithLifecycle()
     val colorScheme = if (isDarkTheme) DarkColorScheme else LightColorScheme
 
@@ -114,7 +123,7 @@ fun EventPageScreenError(msg: String, onRetry: () -> Unit, modifier: Modifier = 
                 modifier = Modifier.padding(16.dp)
             )
             Text(
-                text =  msg,
+                text = msg,
                 modifier = Modifier.padding(16.dp)
             )
             Button(onClick = onRetry) {
@@ -158,7 +167,8 @@ fun EventPageScreenReady(
             }
         }
     ) {
-        Surface( modifier = Modifier.padding(top = topBarHeight )
+        Surface( modifier = Modifier
+            .padding(top = topBarHeight)
             .fillMaxSize(),
         ) {
             LazyColumn( modifier = Modifier.padding(innerPadding)) {
@@ -168,30 +178,41 @@ fun EventPageScreenReady(
                         event = events
                     )
                 }
-
-                item {
-                    //TODO aqui va el boton de agregar
-                }
             }
         }
     }
 }
 
-
-
 @Composable
 @Preview(showBackground = true)
-fun EventPageScreenPreview() {
-    val navController = NavController(LocalContext.current)
-    val innerPadding = PaddingValues()
-
-    EventManagementTheme {
-        EventPageScreen(
-            navController = navController,
-            innerPadding = innerPadding,
-            viewModel = EventPageViewModel()
+fun EventScreenPreview() {
+    KoinApplication( application =  {
+        modules(
+            module {
+                single<LocalRepository> { DummyRepositoryImpl() }
+            }
         )
+    }) {
+        EventManagementTheme {
+            val localRepository: LocalRepository = koinInject()
+
+            val events: List<EventEntity>
+            runBlocking {
+                events = localRepository.getAllEventsFlow().first()
+            }
+
+            val mockUiState = EventScreenUiState.Ready(
+                events = events.map { it.toModel() }
+            )
+
+            EventPageScreenReady(
+                navController = rememberNavController(),
+                uiState = mockUiState,
+                innerPadding = PaddingValues(10.dp)
+            )
+        }
     }
+
 }
 
 private const val TAG = "EventPageScreen"

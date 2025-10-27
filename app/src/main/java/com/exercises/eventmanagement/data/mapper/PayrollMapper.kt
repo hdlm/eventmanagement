@@ -9,7 +9,7 @@ import com.exercises.eventmanagement.presentation.domain.PersonSalaryModel
 fun PayrollEntity.toModel(event: EventModel, persons: List<PersonSalaryModel>) = PayrollModel(
     id = id,
     event = event,
-    persons = persons
+    persons =  persons
 )
 
 fun PayrollModel.toEntity() =

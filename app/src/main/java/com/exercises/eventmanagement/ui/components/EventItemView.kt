@@ -54,8 +54,12 @@ fun EventItemView(
             Text(text = stringResource(R.string.label_eventName), fontWeight = FontWeight.Bold)
             Text(text = event.name)
             Spacer(modifier = Modifier.padding(vertical = lineSpacing))
+            Text(text = stringResource(R.string.label_eventAddress), fontWeight = FontWeight.Bold)
+            Text(text = event.address)
+            Spacer(modifier = Modifier.padding(vertical = lineSpacing))
             Text(text = stringResource(R.string.label_eventDate), fontWeight = FontWeight.Bold)
             Text(text = event.startEventdate)
+
         }
 
     }
@@ -68,9 +72,9 @@ fun EventItemView(
 fun EventItemViewPreview() {
     val event = EventModel(
         id = 1,
-        name = "Sofa Cama Matrimonial",
-        address = "Sin Especificar",
-        startEventdate = "01/01/2025",
+        name = "Fiesta de XV años",
+        address = "Club Hispano",
+        startEventdate = "05/10/2025",
         endEventdate = "Sin Especificar"
     )
 

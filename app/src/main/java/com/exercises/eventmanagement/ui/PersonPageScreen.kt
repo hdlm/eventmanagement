@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,11 +30,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
 import com.exercises.eventmanagement.R
-import com.exercises.eventmanagement.presentation.presenters.EventScreenUiState
-import com.exercises.eventmanagement.ui.components.EventItemView
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.graphics.Color
-import com.exercises.eventmanagement.presentation.presenters.PersonAddViewModel
+import androidx.navigation.compose.rememberNavController
+import com.exercises.eventmanagement.data.database.entities.EventEntity
+import com.exercises.eventmanagement.data.database.entities.PersonEntity
+import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagement.data.mapper.toModel
+import com.exercises.eventmanagement.data.repositories.DummyRepositoryImpl
 import com.exercises.eventmanagement.presentation.presenters.PersonPageViewModel
 import com.exercises.eventmanagement.presentation.presenters.PersonScreenUiState
 import com.exercises.eventmanagement.ui.components.PersonItemView
@@ -43,7 +45,12 @@ import com.exercises.eventmanagement.ui.theme.EventManagementTheme
 import com.exercises.eventmanagement.ui.theme.DarkColorScheme
 import com.exercises.eventmanagement.ui.theme.LightColorScheme
 import com.exercises.eventmanagement.ui.theme.YellowGrey
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
+import org.koin.dsl.module
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -171,30 +178,41 @@ fun PersonPageScreenReady(
                         person = persons
                     )
                 }
-
-                item {
-                    //TODO aqui va el boton de agregar
-                }
             }
         }
     }
 }
 
-
-
 @Composable
 @Preview(showBackground = true)
-fun PersonPageScreenPreview() {
-    val navController = NavController(LocalContext.current)
-    val innerPadding = PaddingValues()
-
-    EventManagementTheme {
-        PersonPageScreen(
-            navController = navController,
-            innerPadding = innerPadding,
-            viewModel = PersonPageViewModel()
+fun PersonScreenPreview() {
+    KoinApplication( application =  {
+        modules(
+            module {
+                single<LocalRepository> { DummyRepositoryImpl() }
+            }
         )
+    }) {
+        EventManagementTheme {
+            val localRepository: LocalRepository = koinInject()
+
+            val persons: List<PersonEntity>
+            runBlocking {
+                persons = localRepository.getAllPerson()
+            }
+
+            val mockUiState = PersonScreenUiState.Ready(
+                persons = persons.map { it.toModel() }
+            )
+
+            PersonPageScreenReady(
+                navController = rememberNavController(),
+                uiState = mockUiState,
+                innerPadding = PaddingValues(10.dp)
+            )
+        }
     }
+
 }
 
 private const val TAG = "PersonPageScreen"

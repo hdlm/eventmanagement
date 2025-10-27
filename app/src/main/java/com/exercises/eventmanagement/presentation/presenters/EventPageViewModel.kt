@@ -37,10 +37,10 @@ class EventPageViewModel : ViewModel(), KoinComponent {
                 },
                 refreshing
             ) { events,
-                refrshing ->
+                refreshing ->
 
-                val uiState = if (refrshing) {
-                    Log.d(TAG, "refreshing: $refrshing")
+                val uiState = if (refreshing) {
+                    Log.d(TAG, "refreshing: $refreshing")
                     EventScreenUiState.Loading
                 } else {
                     EventScreenUiState.Ready(

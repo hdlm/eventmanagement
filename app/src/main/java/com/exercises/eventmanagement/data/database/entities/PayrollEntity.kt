@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.NO_ACTION
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
 
 /**
  * Relacion:

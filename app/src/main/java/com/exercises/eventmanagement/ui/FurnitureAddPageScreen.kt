@@ -39,8 +39,6 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FurnitureAddPageScreen(
-    navController: NavController,
-    innerPadding: PaddingValues,
     viewModel: FurnitureAddPageViewModel = koinViewModel(),
     isDarkTheme: Boolean = false
 ) {
@@ -120,13 +118,9 @@ fun FurnitureAddPageScreen(
 @Composable
 @Preview(showBackground = true)
 fun FurnitureAddPageScreenPreview() {
-    val navController = NavController(LocalContext.current)
-    val innerPadding = PaddingValues()
 
     EventManagementTheme {
         FurnitureAddPageScreen(
-            navController = navController,
-            innerPadding = innerPadding,
             viewModel = FurnitureAddPageViewModel()
         )
     }

@@ -1,130 +1,94 @@
 package com.exercises.eventmanagement.presentation.presenters
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.exercises.eventmanagement.data.database.entities.EventEntity
-import com.exercises.eventmanagement.data.database.entities.PersonEntity
+import androidx.lifecycle.viewModelScope
+import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
+import com.exercises.eventmanagement.data.mapper.toModel
+import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.domain.PersonModel
 import com.exercises.eventmanagement.presentation.usecase.EventInfoUseCase
-import com.exercises.eventmanagement.presentation.usecase.PersonInfoUseCase
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import com.exercises.eventmanagement.presentation.usecase.PersonInfoUseCase
+import com.exercises.eventmanagement.presentation.usecase.PayrollInfoUseCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PayrollAddPageViewModel: ViewModel(), KoinComponent {
-    // Lazy injection
     private val localRepository: LocalRepository by inject()
+
     private val personInfoUseCase: PersonInfoUseCase by inject()
     private val eventInfoUseCase: EventInfoUseCase by inject()
-    private lateinit var persons: List<PersonEntity>
-    private lateinit var events: List<EventEntity>
 
-/*
-    val consulta : (Int) -> Unit = { id ->
+    private val _events = MutableStateFlow<List<EventModel>>(emptyList())
+    private val _persons = MutableStateFlow<List<PersonModel>>(emptyList())
+
+    private val refreshing = MutableStateFlow(false)
+
+    private val _uiState = MutableStateFlow<AddPayrollScreenUiState>(AddPayrollScreenUiState.Loading)
+    val uiState: StateFlow<AddPayrollScreenUiState>
+        get() = _uiState
+
+    init {
         viewModelScope.launch {
-            personInfoUseCase(id)
+            combine(
+                _events.flatMapLatest { eventInfoUseCase() },
+                _persons.flatMapLatest { personInfoUseCase() },
+                refreshing
+            ) { events, persons, refreshing ->
+
+                val uiState = if (refreshing){
+                    Log.d(TAG, "refreshing: $refreshing")
+                    AddPayrollScreenUiState.Loading
+                } else {
+                    AddPayrollScreenUiState.Ready(
+                        events = events,
+                        persons = persons
+                    )
+                }
+                uiState
+
+            }.catch { throwable ->
+                Log.d(TAG, "catch: ${throwable.message}")
+                AddPayrollScreenUiState.Error(throwable.message)
+            }.collect {
+                _uiState.value = it
+            }
+            }
         }
 
-    }
-    fun ejecutarLaConsulta(id: Int) {
-        consulta.invoke(id)
-    }
 
-
-    fun savePayroll(payroll: PayrollModel) {
+    fun savePayroll(payroll: PayrollEntity) {
         viewModelScope.launch {
-            val payrollEntity = payroll.toEntity()  // mapeo de model a entity
-
-            localRepository.insertPayroll(payrollEntity)
+            localRepository.insertPayroll(payroll)
         }
     }
 
-    fun getPersons (onDone: (Array<String>) -> Unit) = {
-        viewModelScope.launch {
-            val personsDeferred: Deferred<List<PersonEntity>> = getPersonsAsync(scope = this)
-            val entities = personsDeferred.await()
-
-            val models = entities.map { it.toModel() }
-            val listOfPerson = models.map { it.name }
-
-            onDone.invoke(listOfPerson.toTypedArray())
-        }
-
+    companion object {
+        private const val TAG = "PayrollAddPageViewModel"
     }
-
-    /**
-     * Traer el [Payroll]](PayRoll) por id
-     * syntaxis de MarkDown
-     */
-    fun getPayroll(id: Int, onDone: (PayrollModel) -> Unit): Unit {
-        viewModelScope.launch {
-            val payrollDeferred = getPayrollAsync(id = id, scope = this)
-            val personDeferred = getPersonAsync(id = id, scope = this)
-//            val eventDeferred = getEventAsync(id = id, scope = this)
-
-            val payroll = payrollDeferred.await()
-            val person = personDeferred.await()
-//            val event = eventDeferred.await()
-
-            val model = PayrollModel(
-                id = payroll.id,
-                person = person.toModel(),
-                salary = payroll.salary,
-                event = event.toModel(),
-                typeActivity = payroll.typeActivity
-            )
-
-            onDone.invoke(model)
-        }
-    }
-
-    private fun getPayrollAsync(id: Int, scope: CoroutineScope): Deferred<PayrollEntity> = scope.async {
-        localRepository.getPayrollById(id)
-    }
-
-    private fun getPersonAsync(id: Int, scope: CoroutineScope): Deferred<PersonEntity> = scope.async {
-        personInfoUseCase.invoke(id)
-    }
-    private fun getPersonsAsync(scope: CoroutineScope): Deferred<List<PersonEntity>> = scope.async {
-        personInfoUseCase.invoke()
-    }
-
-//    private fun getEventAsync(id: Int, scope: CoroutineScope): Deferred<EventEntity> = scope.async {
-////        eventInfoUseCase.invoke(id)
-//    }
-
-    suspend fun mycoroutine() {
-        viewModelScope.launch(Dispatchers.IO) {
-            getNumeros()
-            delay(100L)
-        }
-        viewModelScope.launch(Dispatchers.IO) {
-            getLetras()
-            delay(50L)
-        }
-    }
-
-    suspend fun getNumeros() {
-        for(n in 1..20) {
-            Log.d(TAG, "getNumeros() -> n: $n")
-            delay(100L)
-        }
-
-    }
-
-    suspend fun getLetras() {
-        for(c in 'a'..'m') {
-            Log.d(TAG, "getLetras() -> c: $c")
-            delay(50L)
-        }
-    }
-
-    // traer todo el payroll
-    suspend fun getAllPayroll() {
-        viewModelScope.launch {
-            localRepository.getAllPayroll()
-        }
-    }
-
-
- */
 }
 
-private const val TAG = "PayrollPageViewModel"
+
+sealed interface AddPayrollScreenUiState {
+    data object  Loading: AddPayrollScreenUiState
+
+    data class Error(
+        val errorMassage: String? = null
+    ) : AddPayrollScreenUiState
+
+    data class Ready (
+        val events: List<EventModel> = emptyList(),
+        val persons: List<PersonModel> = emptyList()
+    ) : AddPayrollScreenUiState
+}
