@@ -1,11 +1,11 @@
-package com.exercises.eventmanagment.data.database.daos
+package com.exercises.eventmanagement.data.database.daos
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

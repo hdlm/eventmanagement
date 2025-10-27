@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui
+package com.exercises.eventmanagement.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -23,9 +23,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
-import com.exercises.eventmanagment.presentation.domain.PayrollModel
-import com.exercises.eventmanagment.presentation.presenters.PayrollAddPageViewModel
-import com.exercises.eventmanagment.ui.theme.EventManagementTheme
+import com.exercises.eventmanagement.presentation.domain.PayrollModel
+import com.exercises.eventmanagement.presentation.presenters.PayrollAddPageViewModel
+import com.exercises.eventmanagement.ui.theme.EventManagementTheme
 import org.koin.androidx.compose.koinViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,8 +37,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.exercises.eventmanagment.R
-import com.exercises.eventmanagment.ui.theme.grayDark
+import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.ui.theme.grayDark
 
 
 @OptIn(ExperimentalMaterial3Api::class)

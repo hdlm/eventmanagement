@@ -1,7 +1,7 @@
-package com.exercises.eventmanagment.ui.components
+package com.exercises.eventmanagement.ui.components
 
 import androidx.compose.foundation.BorderStroke
-import com.exercises.eventmanagment.R
+import com.exercises.eventmanagement.R
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.exercises.eventmanagment.presentation.domain.FurnitureModel
+import com.exercises.eventmanagement.presentation.domain.FurnitureModel
 
 
 @Composable

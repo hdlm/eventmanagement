@@ -1,9 +1,9 @@
-package com.exercises.eventmanagment.data.database.entities.relations
+package com.exercises.eventmanagement.data.database.entities.relations
 
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
-import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
+import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
 
 data class PayrollWithPersonSalary(
 

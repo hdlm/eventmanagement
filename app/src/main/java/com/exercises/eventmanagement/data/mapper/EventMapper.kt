@@ -1,7 +1,7 @@
-package com.exercises.eventmanagment.data.mapper
+package com.exercises.eventmanagement.data.mapper
 
 import com.exercises.eventmanagement.data.database.entities.EventEntity
-import com.exercises.eventmanagment.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.domain.EventModel
 
 fun EventEntity.toModel() =
     EventModel(

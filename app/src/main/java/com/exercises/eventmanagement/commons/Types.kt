@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.commons
+package com.exercises.eventmanagement.commons
 
 typealias onDismissType = () -> Unit
 

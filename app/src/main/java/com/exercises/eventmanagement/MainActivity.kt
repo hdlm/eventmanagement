@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment
+package com.exercises.eventmanagement
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -29,11 +29,11 @@ import com.exercises.eventmanagement.commons.CommonValues
 import com.exercises.eventmanagement.di.Modules.appModule
 import com.exercises.eventmanagement.ui.navigation.AppNavigation
 import com.exercises.eventmanagement.ui.navigation.Screens
-import com.exercises.eventmanagment.ui.theme.DarkColorScheme
-import com.exercises.eventmanagment.ui.theme.EventManagementTheme
-import com.exercises.eventmanagment.ui.theme.LightColorScheme
-import com.exercises.eventmanagment.ui.theme.Yellow
-import com.exercises.eventmanagment.ui.theme.YellowSurface
+import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.EventManagementTheme
+import com.exercises.eventmanagement.ui.theme.LightColorScheme
+import com.exercises.eventmanagement.ui.theme.Yellow
+import com.exercises.eventmanagement.ui.theme.YellowSurface
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

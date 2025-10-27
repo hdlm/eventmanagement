@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui
+package com.exercises.eventmanagement.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -26,14 +26,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
-import com.exercises.eventmanagment.R
-import com.exercises.eventmanagment.presentation.domain.FurnitureModel
-import com.exercises.eventmanagment.presentation.presenters.FurnitureAddPageViewModel
-import com.exercises.eventmanagment.ui.theme.DarkColorScheme
-import com.exercises.eventmanagment.ui.theme.EventManagementTheme
-import com.exercises.eventmanagment.ui.theme.LightColorScheme
-import com.exercises.eventmanagment.ui.theme.YellowGrey
-import com.exercises.eventmanagment.ui.theme.YellowSurface
+import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.presentation.domain.FurnitureModel
+import com.exercises.eventmanagement.presentation.presenters.FurnitureAddPageViewModel
+import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.EventManagementTheme
+import com.exercises.eventmanagement.ui.theme.LightColorScheme
+import com.exercises.eventmanagement.ui.theme.YellowGrey
+import com.exercises.eventmanagement.ui.theme.YellowSurface
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

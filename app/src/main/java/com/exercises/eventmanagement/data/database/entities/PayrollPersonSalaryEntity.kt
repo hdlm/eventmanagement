@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.data.database.entities
+package com.exercises.eventmanagement.data.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

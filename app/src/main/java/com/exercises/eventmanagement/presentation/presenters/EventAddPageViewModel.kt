@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
-import com.exercises.eventmanagment.presentation.domain.EventModel
-import com.exercises.eventmanagment.presentation.usecase.EventInfoUseCase
+import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.usecase.EventInfoUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent

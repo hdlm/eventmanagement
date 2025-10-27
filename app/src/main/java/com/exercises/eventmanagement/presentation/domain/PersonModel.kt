@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.presentation.domain
+package com.exercises.eventmanagement.presentation.domain
 
 data class PersonModel(
     val id: Int?,

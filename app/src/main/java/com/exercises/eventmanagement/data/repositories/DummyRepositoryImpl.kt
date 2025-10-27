@@ -1,14 +1,13 @@
-package com.exercises.eventmanagment.data.repositories
+package com.exercises.eventmanagement.data.repositories
 
 import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
+import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
-import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
-import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 
 class DummyRepositoryImpl : LocalRepository {

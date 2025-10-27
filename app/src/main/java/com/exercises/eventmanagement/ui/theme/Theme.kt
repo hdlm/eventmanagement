@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui.theme
+package com.exercises.eventmanagement.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

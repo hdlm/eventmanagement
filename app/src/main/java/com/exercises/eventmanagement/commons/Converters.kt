@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.commons
+package com.exercises.eventmanagement.commons
 
 import androidx.room.TypeConverter
 import com.exercises.eventmanagement.commons.CommonValues.TypeActivity

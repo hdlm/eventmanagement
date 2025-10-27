@@ -1,15 +1,15 @@
-package com.exercises.eventmanagment.data.mapper
+package com.exercises.eventmanagement.data.mapper
 
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
-import com.exercises.eventmanagment.presentation.domain.EventModel
-import com.exercises.eventmanagment.presentation.domain.PayrollModel
-import com.exercises.eventmanagment.presentation.domain.PersonSalaryModel
+import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.domain.PayrollModel
+import com.exercises.eventmanagement.presentation.domain.PersonSalaryModel
 
 
 fun PayrollEntity.toModel(event: EventModel, persons: List<PersonSalaryModel>) = PayrollModel(
     id = id,
     event = event,
-    persons =  persons
+    persons = persons
 )
 
 fun PayrollModel.toEntity() =

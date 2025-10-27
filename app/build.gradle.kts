@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.exercises.eventmanagment"
+    namespace = "com.exercises.eventmanagement"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.exercises.eventmanagment"
+        applicationId = "com.exercises.eventmanagement"
         minSdk = 28
         targetSdk = 36
         versionCode = 1

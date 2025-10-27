@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.data.repositories
+package com.exercises.eventmanagement.data.repositories
 
 import kotlinx.coroutines.flow.Flow
 

@@ -1,7 +1,8 @@
-package com.exercises.eventmanagment.data.mapper
+package com.exercises.eventmanagement.data.mapper
 
-import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
-import com.exercises.eventmanagment.presentation.domain.PersonSalaryModel
+import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
+import com.exercises.eventmanagement.presentation.domain.PersonSalaryModel
+
 
 fun PersonSalaryModel.toEntity() =
     PersonSalaryEntity(

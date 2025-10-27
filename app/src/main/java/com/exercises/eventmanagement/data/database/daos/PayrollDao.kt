@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
-import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
-import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
+import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,7 +1,7 @@
-package com.exercises.eventmanagment.data.mapper
+package com.exercises.eventmanagement.data.mapper
 
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
-import com.exercises.eventmanagment.presentation.domain.FurnitureModel
+import com.exercises.eventmanagement.presentation.domain.FurnitureModel
 
 fun FurnitureModel.toEntity() =
     FurnitureEntity(

@@ -5,15 +5,15 @@ import com.exercises.eventmanagement.data.database.AppDatabase
 import com.exercises.eventmanagement.data.database.daos.EventDao
 import com.exercises.eventmanagement.data.database.daos.FurnitureDao
 import com.exercises.eventmanagement.data.database.daos.PayrollDao
+import com.exercises.eventmanagement.data.database.daos.PayrollPersonSalaryDao
 import com.exercises.eventmanagement.data.database.daos.PersonDao
 import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
-import com.exercises.eventmanagment.data.database.daos.PayrollPersonSalaryDao
-import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
-import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
-import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
+import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
 
 class LocalRepositoryImpl : LocalRepository {

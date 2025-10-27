@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui.theme
+package com.exercises.eventmanagement.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

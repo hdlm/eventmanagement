@@ -1,10 +1,10 @@
-package com.exercises.eventmanagment.presentation.presenters
+package com.exercises.eventmanagement.presentation.presenters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
-import com.exercises.eventmanagment.presentation.domain.PersonModel
+import com.exercises.eventmanagement.presentation.domain.PersonModel
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

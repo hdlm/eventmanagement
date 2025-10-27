@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui
+package com.exercises.eventmanagement.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -32,13 +32,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
-import com.exercises.eventmanagment.R
-import com.exercises.eventmanagment.presentation.presenters.FurniturePageViewModel
-import com.exercises.eventmanagment.presentation.presenters.FurnitureScreenUiState
-import com.exercises.eventmanagment.ui.components.FurnitureItemView
-import com.exercises.eventmanagment.ui.theme.DarkColorScheme
-import com.exercises.eventmanagment.ui.theme.EventManagementTheme
-import com.exercises.eventmanagment.ui.theme.LightColorScheme
+import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.presentation.presenters.FurniturePageViewModel
+import com.exercises.eventmanagement.presentation.presenters.FurnitureScreenUiState
+import com.exercises.eventmanagement.ui.components.FurnitureItemView
+import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.EventManagementTheme
+import com.exercises.eventmanagement.ui.theme.LightColorScheme
 import org.koin.androidx.compose.koinViewModel
 
 

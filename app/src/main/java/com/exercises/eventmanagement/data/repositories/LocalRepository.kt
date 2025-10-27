@@ -3,9 +3,9 @@ package com.exercises.eventmanagement.data.database.repositories
 import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
-import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
-import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 

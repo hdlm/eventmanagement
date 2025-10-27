@@ -1,14 +1,14 @@
-package com.exercises.eventmanagment.presentation.presenters
+package com.exercises.eventmanagement.presentation.presenters
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
-import com.exercises.eventmanagment.presentation.domain.EventModel
-import com.exercises.eventmanagment.presentation.domain.PersonModel
-import com.exercises.eventmanagment.presentation.usecase.EventInfoUseCase
-import com.exercises.eventmanagment.presentation.usecase.PayrollInfoUseCase
-import com.exercises.eventmanagment.presentation.usecase.PersonInfoUseCase
+import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.domain.PersonModel
+import com.exercises.eventmanagement.presentation.usecase.EventInfoUseCase
+import com.exercises.eventmanagement.presentation.usecase.PayrollInfoUseCase
+import com.exercises.eventmanagement.presentation.usecase.PersonInfoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

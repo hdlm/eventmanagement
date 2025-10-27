@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui
+package com.exercises.eventmanagement.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -33,15 +33,15 @@ import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.repositories.LocalRepository
 import com.exercises.eventmanagement.presentation.presenters.EventAddPageViewModel
 import com.exercises.eventmanagement.ui.navigation.Screens
-import com.exercises.eventmanagment.R
-import com.exercises.eventmanagment.data.mapper.toModel
-import com.exercises.eventmanagment.data.repositories.DummyRepositoryImpl
-import com.exercises.eventmanagment.presentation.domain.EventModel
-import com.exercises.eventmanagment.ui.theme.DarkColorScheme
-import com.exercises.eventmanagment.ui.theme.EventManagementTheme
-import com.exercises.eventmanagment.ui.theme.LightColorScheme
-import com.exercises.eventmanagment.ui.theme.YellowGrey
-import com.exercises.eventmanagment.ui.theme.YellowSurface
+import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.data.mapper.toModel
+import com.exercises.eventmanagement.data.repositories.DummyRepositoryImpl
+import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.EventManagementTheme
+import com.exercises.eventmanagement.ui.theme.LightColorScheme
+import com.exercises.eventmanagement.ui.theme.YellowGrey
+import com.exercises.eventmanagement.ui.theme.YellowSurface
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.koin.androidx.compose.koinViewModel

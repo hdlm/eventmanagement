@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui
+package com.exercises.eventmanagement.ui
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -30,15 +30,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.exercises.eventmanagement.ui.navigation.Screens
-import com.exercises.eventmanagment.R
-import com.exercises.eventmanagment.data.database.entities.relations.PayrollWithPersonSalary
-import com.exercises.eventmanagment.presentation.domain.EventModel
-import com.exercises.eventmanagment.presentation.presenters.PayrollPageViewModel
-import com.exercises.eventmanagment.presentation.presenters.PayrollScreenUiState
-import com.exercises.eventmanagment.ui.components.PayrollItemView
-import com.exercises.eventmanagment.ui.theme.DarkColorScheme
-import com.exercises.eventmanagment.ui.theme.LightColorScheme
-import com.exercises.eventmanagment.ui.theme.YellowGrey
+import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.data.database.entities.relations.PayrollWithPersonSalary
+import com.exercises.eventmanagement.presentation.domain.EventModel
+import com.exercises.eventmanagement.presentation.presenters.PayrollPageViewModel
+import com.exercises.eventmanagement.presentation.presenters.PayrollScreenUiState
+import com.exercises.eventmanagement.ui.components.PayrollItemView
+import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.LightColorScheme
+import com.exercises.eventmanagement.ui.theme.YellowGrey
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,10 +1,10 @@
-package com.exercises.eventmanagment.presentation.presenters
+package com.exercises.eventmanagement.presentation.presenters
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.exercises.eventmanagment.presentation.domain.FurnitureModel
-import com.exercises.eventmanagment.presentation.usecase.FurnitureInfoUseCase
+import com.exercises.eventmanagement.presentation.domain.FurnitureModel
+import com.exercises.eventmanagement.presentation.usecase.FurnitureInfoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +33,7 @@ class FurniturePageViewModel : ViewModel(), KoinComponent {
     init {
         viewModelScope.launch {
 
-            com.exercises.eventmanagment.commons.combine(
+            com.exercises.eventmanagement.commons.combine(
                 _furnitures.flatMapLatest {
                     furnitureInfoUseCase()
                 },

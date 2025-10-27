@@ -13,10 +13,10 @@ import com.exercises.eventmanagement.data.database.entities.EventEntity
 import com.exercises.eventmanagement.data.database.entities.FurnitureEntity
 import com.exercises.eventmanagement.data.database.entities.PayrollEntity
 import com.exercises.eventmanagement.data.database.entities.PersonEntity
-import com.exercises.eventmanagment.commons.Converters
-import com.exercises.eventmanagment.data.database.daos.PayrollPersonSalaryDao
-import com.exercises.eventmanagment.data.database.entities.PayrollPersonSalaryEntity
-import com.exercises.eventmanagment.data.database.entities.PersonSalaryEntity
+import com.exercises.eventmanagement.commons.Converters
+import com.exercises.eventmanagement.data.database.daos.PayrollPersonSalaryDao
+import com.exercises.eventmanagement.data.database.entities.PayrollPersonSalaryEntity
+import com.exercises.eventmanagement.data.database.entities.PersonSalaryEntity
 
 
 /**

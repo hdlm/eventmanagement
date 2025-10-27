@@ -1,4 +1,4 @@
-package com.exercises.eventmanagment.ui.components
+package com.exercises.eventmanagement.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
@@ -18,11 +18,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.exercises.eventmanagment.R
-import com.exercises.eventmanagment.presentation.domain.PersonModel
-import com.exercises.eventmanagment.ui.theme.DarkColorScheme
-import com.exercises.eventmanagment.ui.theme.LightColorScheme
-import com.exercises.eventmanagment.ui.theme.YellowGrey
+import com.exercises.eventmanagement.R
+import com.exercises.eventmanagement.presentation.domain.PersonModel
+import com.exercises.eventmanagement.ui.theme.DarkColorScheme
+import com.exercises.eventmanagement.ui.theme.LightColorScheme
+import com.exercises.eventmanagement.ui.theme.YellowGrey
 
 @Composable
 fun PersonItemView(
